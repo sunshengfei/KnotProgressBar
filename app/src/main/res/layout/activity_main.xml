@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.freddon.android.app.knotprogressbar.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/wrap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/kpb"
+        android:orientation="horizontal">
+
+        <com.freddon.android.app.knotprogressbar.KnotProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:kpb_background_label_font_color="@color/lightGray"
+            app:kpb_background_progressbar_color="@color/lightGray"
+            app:kpb_current_pos="2"
+            app:kpb_horizontal_extend="false"
+            app:kpb_knot_radius="10dp"
+            app:kpb_label_font_color="@color/fontBlack"
+            app:kpb_label_font_size="@dimen/H5"
+            app:kpb_progress_cell_height="4dp"
+            app:kpb_progress_cell_width="40dp"
+            app:kpb_progressbar_color="@color/hightLight"
+            app:kpb_vertical_spacing="10dp" />
+
+    </LinearLayout>
+
+    <com.freddon.android.app.knotprogressbar.KnotProgressBar
+        android:id="@+id/kpb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:kpb_background_label_font_color="@color/lightGray"
+        app:kpb_background_progressbar_color="@color/lightGray"
+        app:kpb_current_pos="2"
+        app:kpb_horizontal_margin="15dp"
+        app:kpb_knot_radius="10dp"
+        app:kpb_label_font_color="@color/fontBlack"
+        app:kpb_label_font_size="@dimen/H5"
+        app:kpb_labels="待审核,待签约,待付款,已付款"
+        app:kpb_progress_cell_height="4dp"
+        app:kpb_progress_cell_width="80dp"
+        app:kpb_progressbar_color="@color/hightLight"
+        app:kpb_vertical_spacing="10dp" />
+
+    <com.freddon.android.app.knotprogressbar.KnotProgressBar
+        android:id="@+id/nums"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/wrap"
+        app:kpb_background_label_font_color="@color/lightGray"
+        app:kpb_background_progressbar_color="@color/lightGray"
+        app:kpb_current_pos="2"
+        app:kpb_horizontal_extend="false"
+        app:kpb_knot_count="5"
+        app:kpb_knot_radius="10dp"
+        app:kpb_label_font_color="@color/fontBlack"
+        app:kpb_label_font_size="@dimen/H5"
+        app:kpb_horizontal_margin="15dp"
+        app:kpb_labels="待提交,待审核,待签约,待付款,已付款"
+        app:kpb_progress_cell_height="4dp"
+        app:kpb_progress_cell_width="80dp"
+        app:kpb_progressbar_color="@color/hightLight"
+        app:kpb_vertical_spacing="10dp" />
+
+    <com.freddon.android.app.knotprogressbar.KnotProgressBar
+        android:id="@+id/vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nums"
+        app:kpb_background_label_font_color="@color/lightGray"
+        app:kpb_background_progressbar_color="@color/lightGray"
+        app:kpb_current_pos="2"
+        app:kpb_horizontal_extend="false"
+        app:kpb_knot_radius="10dp"
+        app:kpb_label_font_color="@color/fontBlack"
+        app:kpb_label_font_size="@dimen/H5"
+        app:kpb_label_vertical="true"
+        app:kpb_labels="待审核,待签约,待付款,已付款"
+        app:kpb_progress_cell_height="4dp"
+        app:kpb_horizontal_margin="15dp"
+        app:kpb_progress_cell_width="80dp"
+        app:kpb_progressbar_color="@color/hightLight"
+        app:kpb_vertical_spacing="10dp" />
+</RelativeLayout>

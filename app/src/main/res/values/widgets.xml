@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="KnotProgressBar">
+        <attr name="kpb_progress_cell_height" format="float|dimension" />
+        <attr name="kpb_progress_cell_width" format="float|dimension" />
+        <attr name="kpb_knot_count" format="integer" />
+        <attr name="kpb_knot_radius" format="float|dimension" />
+        <attr name="kpb_progressbar_color" format="color" />
+        <attr name="kpb_label_font_color" format="color" />
+        <attr name="kpb_background_progressbar_color" format="color" />
+        <attr name="kpb_background_label_font_color" format="color" />
+        <attr name="kpb_current_pos" format="integer" />
+        <attr name="kpb_labels" format="string" />
+        <attr name="kpb_content_margin" format="float|dimension" />
+        <attr name="kpb_vertical_spacing" format="float|dimension" />
+        <attr name="kpb_horizontal_margin" format="float|dimension" />
+        <attr name="kpb_label_font_size" format="dimension" />
+        <attr name="kpb_horizontal_extend" format="boolean" />
+        <attr name="kpb_label_vertical" format="boolean" />
+    </declare-styleable>
+</resources>
