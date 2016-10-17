@@ -17,5 +17,10 @@
         <attr name="kpb_label_font_size" format="dimension" />
         <attr name="kpb_horizontal_extend" format="boolean" />
         <attr name="kpb_label_vertical" format="boolean" />
+        <attr name="kpb_orientation" format="integer">
+            <enum name="vertical" value="0" />
+            <enum name="horizontal" value="1" />
+        </attr>
+
     </declare-styleable>
 </resources>

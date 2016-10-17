@@ -32,13 +32,14 @@ public class KnotProgressBar extends View {
 
     private final static int ROT_SIZE = 4;//默认节点个数
     private int currentProgress = 2;//当前节点位置
+    private float offsetTop = 2F;
     private int knotSize = ROT_SIZE;
     private float progressHeight = 10;//进度条高度
     private float progressWidth;//进度条宽度 该值尽在View属性为wrap_content时有效
     private float progressRotRadius = 30;//节点半径
     private String[] progressRotLabels;//节点状态文字
     private float progressHorMargin = 30F;//最外层Progress 水平margin
-    private float iconPadding = 15F;//最外层Progress 水平margin
+    private float iconPadding = 5F;//Knot与Label 间距
     private float viewBottom;
     private float labelFontSize = 20F;
     private boolean withIsUnLimited = false;//水平方向是否无限延伸
@@ -83,13 +84,13 @@ public class KnotProgressBar extends View {
         backgroundProgressPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         backgroundProgressPaint.setColor(backgroundColor);
         backgroundProgressPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        backgroundProgressPaint.setStrokeWidth(1);
+        backgroundProgressPaint.setStrokeWidth(0);
 
         // Init Foreground
         foregroundPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         foregroundPaint.setColor(color);
         foregroundPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        foregroundPaint.setStrokeWidth(1);
+        foregroundPaint.setStrokeWidth(0);
 
 
         labelPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -153,9 +154,8 @@ public class KnotProgressBar extends View {
                 viewBottom = backgroundProgressRect.centerY() + progressRotRadius + 5;
                 requestLayout();
                 invalidate();
-                return;
+                needMeasureHeight = false;
             }
-            needMeasureHeight = false;
         }
         // endregion
     }
@@ -163,19 +163,11 @@ public class KnotProgressBar extends View {
     //region Mesure Method
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int heightM = getDefaultSize(getSuggestedMinimumHeight(), heightMeasureSpec);
         int widthM = getDefaultSize(getSuggestedMinimumWidth(), widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        if (heightMode == MeasureSpec.AT_MOST) {
-            if (viewBottom != 0) {
-                setMeasuredDimension(widthM, (int) Math.min(heightM, viewBottom));
-            } else {
-                setMeasuredDimension(widthM, heightM);
-            }
-        } else {
-            setMeasuredDimension(widthM, heightM);
-        }
         float spX;
         if (widthMode == MeasureSpec.AT_MOST && progressWidth > 0) {
             spX = progressWidth * knotSize + 2 * (progressRotRadius + progressHorMargin);
@@ -183,7 +175,18 @@ public class KnotProgressBar extends View {
         } else {
             spX = 0;
         }
-        rectF.set(spX, 0, widthM - spX, heightM);
+        if (heightMode == MeasureSpec.AT_MOST || heightMode == MeasureSpec.UNSPECIFIED) {
+            if (viewBottom != 0) {
+                setMeasuredDimension(widthM, (int) Math.min(heightM, viewBottom));
+                rectF.set(spX, offsetTop, widthM - spX, (int) Math.min(heightM, viewBottom));
+            } else {
+                setMeasuredDimension(widthM, heightM);
+                rectF.set(spX, offsetTop, widthM - spX, heightM);
+            }
+        } else {
+            setMeasuredDimension(widthM, heightM);
+            rectF.set(spX, offsetTop, widthM - spX, heightM);
+        }
         backgroundProgressRect.set(rectF.left + progressRotRadius + progressHorMargin, rectF.top + progressRotRadius - progressHeight / 2, rectF.right - progressRotRadius - progressHorMargin, rectF.top + progressRotRadius + progressHeight / 2);
     }
 
@@ -274,10 +277,11 @@ public class KnotProgressBar extends View {
             String labelText = "" + progressRotLabels[i];
             RectF targetRect = new RectF();
             targetRect.left = backgroundProgressRect.left - width / 2 + cellWidth * i;
-            targetRect.top = leftY;
+            targetRect.top = leftY + fontMetrics.top;
             targetRect.right = targetRect.left + width;
             targetRect.bottom = leftY + fontMetrics.bottom - fontMetrics.top;
-            float baseline = (targetRect.bottom + targetRect.top - fontMetrics.bottom - fontMetrics.top) / 2;
+//            float baseline = (targetRect.bottom + targetRect.top - fontMetrics.bottom - fontMetrics.top) / 2;
+            float baseline = targetRect.centerY() - (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.top;
             if (labelVertical) {
                 if (needMeasureHeight) {
                     float heg = (fontMetrics.bottom - fontMetrics.top) * labelText.length() + backgroundProgressRect.centerY() + progressRotRadius + iconPadding;
@@ -290,6 +294,7 @@ public class KnotProgressBar extends View {
                         } else {
                             paint = backgroundPaint;
                         }
+                        baseline = targetRect.centerY() - (fontMetrics.bottom - fontMetrics.top) / 2;
                         String[] arr = progressRotLabels[i].split("");
                         for (int j = 0; j < arr.length; j++) {
                             canvas.drawText(arr[j], targetRect.centerX(), baseline + j * (fontMetrics.bottom - fontMetrics.top), paint);

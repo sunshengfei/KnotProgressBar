@@ -10,6 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.freddon.android.app.knotprogressbar.MainActivity">
 
+
     <LinearLayout
         android:id="@+id/wrap"
         android:layout_width="wrap_content"
@@ -65,11 +66,11 @@
         app:kpb_background_progressbar_color="@color/lightGray"
         app:kpb_current_pos="2"
         app:kpb_horizontal_extend="false"
+        app:kpb_horizontal_margin="15dp"
         app:kpb_knot_count="5"
         app:kpb_knot_radius="10dp"
         app:kpb_label_font_color="@color/fontBlack"
         app:kpb_label_font_size="@dimen/H5"
-        app:kpb_horizontal_margin="15dp"
         app:kpb_labels="待提交,待审核,待签约,待付款,已付款"
         app:kpb_progress_cell_height="4dp"
         app:kpb_progress_cell_width="80dp"
@@ -85,14 +86,46 @@
         app:kpb_background_progressbar_color="@color/lightGray"
         app:kpb_current_pos="2"
         app:kpb_horizontal_extend="false"
+        app:kpb_horizontal_margin="15dp"
         app:kpb_knot_radius="10dp"
         app:kpb_label_font_color="@color/fontBlack"
         app:kpb_label_font_size="@dimen/H5"
         app:kpb_label_vertical="true"
         app:kpb_labels="待审核,待签约,待付款,已付款"
         app:kpb_progress_cell_height="4dp"
-        app:kpb_horizontal_margin="15dp"
         app:kpb_progress_cell_width="80dp"
         app:kpb_progressbar_color="@color/hightLight"
         app:kpb_vertical_spacing="10dp" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
+
+            <com.freddon.android.app.knotprogressbar.KnotProgressBar
+                android:id="@+id/kpbar"
+                android:layout_width="2000dp"
+                android:layout_height="wrap_content"
+                app:kpb_background_label_font_color="@color/lightGray"
+                app:kpb_background_progressbar_color="@color/lightGray"
+                app:kpb_current_pos="1"
+                app:kpb_horizontal_extend="false"
+                app:kpb_knot_radius="10dp"
+                app:kpb_label_font_color="@color/fontBlack"
+                app:kpb_label_font_size="@dimen/H5"
+                app:kpb_label_vertical="true"
+                app:kpb_labels="杨高中路站,世纪大道站,商城路站,小南门站,陆家浜路站,马当路站,打浦桥站,嘉善路站,肇嘉浜路站,徐家汇站,宜山路站,桂林路站,漕河泾开发区站,合川路站,星中路站,七宝站,中春路站,九亭站,泗泾站,佘山站,洞泾站,松江大学城站,松江新城站,松江体育中心站,醉白池站,松江南站站"
+                app:kpb_progress_cell_height="4dp"
+                app:kpb_progress_cell_width="80dp"
+                app:kpb_progressbar_color="@color/hightLight"
+                app:kpb_vertical_spacing="10dp" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
 </RelativeLayout>
