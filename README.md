@@ -69,9 +69,7 @@ A Custom View
 
 ###用法三 （嵌套ScrollView、HorizontalScrollView）
 
->1 根据嵌套的ScrollView或HorizontalScrollView设置固定的高或宽
-
->2 设置`app:kpb_horizontal_extend="true"`
+> 根据嵌套的ScrollView或HorizontalScrollView设置固定的高或宽
 
 ```xml
 <HorizontalScrollView
@@ -140,7 +138,7 @@ app:kpb_horizontal_margin="15dp"
 ```
 app:kpb_vertical_spacing="10dp"
 ```
-####横向扩展（注：嵌套HorizontalScrollView、ScrollView，需要至少设置宽或高）
+####横向扩展（未设置固定宽度时，`true`:启用app:kpb_progress_cell_width）
 ```
 app:kpb_horizontal_extend
 
