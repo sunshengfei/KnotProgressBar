@@ -286,49 +286,40 @@ public class KnotProgressBar extends View {
                 if (needMeasureHeight) {
                     float heg = (fontMetrics.bottom - fontMetrics.top) * labelText.length() + backgroundProgressRect.centerY() + progressRotRadius + iconPadding;
                     viewBottom = Math.max(viewBottom, heg);
-                } else {
-                    if (progressRotLabels != null) {
-                        Paint paint;
-                        if (i <= currentProgress) {
-                            paint = foregroundPaint;
-                        } else {
-                            paint = backgroundPaint;
-                        }
-                        baseline = targetRect.centerY() - (fontMetrics.bottom - fontMetrics.top) / 2;
-                        String[] arr = progressRotLabels[i].split("");
-                        for (int j = 0; j < arr.length; j++) {
-                            canvas.drawText(arr[j], targetRect.centerX(), baseline + j * (fontMetrics.bottom - fontMetrics.top), paint);
-                        }
-                    }
-//                    float[] widths = new float[1];
-//                    foregroundPaint.getTextWidths("飞", widths);
-//                    StaticLayout layout = new StaticLayout(labelText, labelForegroundTextPaint,
-//                            (int) widths[0], Layout.Alignment.ALIGN_NORMAL, 1.0F, 0.0F, false);
-//                    canvas.translate(targetRect.centerX(),
-//                            baseline);
-//                    layout.draw(canvas);
                 }
+                if (progressRotLabels != null) {
+                    Paint paint;
+                    if (i <= currentProgress) {
+                        paint = foregroundPaint;
+                    } else {
+                        paint = backgroundPaint;
+                    }
+                    baseline = targetRect.centerY() - (fontMetrics.bottom - fontMetrics.top) / 2;
+                    String[] arr = progressRotLabels[i].split("");
+                    for (int j = 0; j < arr.length; j++) {
+                        canvas.drawText(arr[j], targetRect.centerX(), baseline + j * (fontMetrics.bottom - fontMetrics.top), paint);
+                    }
+                }
+//
             } else {
                 if (needMeasureHeight) {
                     float heg = targetRect.bottom - backgroundProgressRect.top + progressRotRadius + progressHeight / 2;
                     viewBottom = Math.max(viewBottom, heg);
-                } else {
-                    if (i <= currentProgress) {
-                        canvas.drawText(labelText, targetRect.centerX(), baseline, foregroundPaint);
-                        //画背景
-                    } else {
-                        //画前景
-                        canvas.drawText(labelText, targetRect.centerX(), baseline, backgroundPaint);
-                    }
                 }
-            }
-            if (needMeasureHeight) {
-                requestLayout();
-            }
-            needMeasureHeight = false;
+                if (i <= currentProgress) {
+                    canvas.drawText(labelText, targetRect.centerX(), baseline, foregroundPaint);
+                    //画背景
+                } else {
+                    //画前景
+                    canvas.drawText(labelText, targetRect.centerX(), baseline, backgroundPaint);
+                }
 
-
+            }
         }
+        if (needMeasureHeight) {
+            requestLayout();
+        }
+        needMeasureHeight = false;
     }
 
 
